@@ -1,0 +1,250 @@
+create table customer (
+CUST_ID NUMBER(5) CONSTRAINT PK_CUSTOMERID PRIMARY KEY,
+CUST_FIRST_NAME VARCHAR(25),
+CUST_LAST_NAME VARCHAR(25),
+CUST_EMAIL VARCHAR(40),
+CUST_PHONE NUMBER(20),
+CUST_HOUSE_NO NUMBER(10),
+CUST_STREET VARCHAR(50),
+CUST_BLOCK VARCHAR(50),
+CUST_CITY VARCHAR(50),
+CUST_STATE VARCHAR(20),
+CUST_PIN_NO VARCHAR(6)
+);
+
+
+INSERT INTO CUSTOMER VALUES (
+10201, 
+'Stepen',
+'Spilberg',
+'stephen.s@gmail.com',
+9591523000,
+214,
+'5 C MAIN',
+'2',
+'Karnataka',
+'Bangalore',
+560043
+);
+
+
+INSERT INTO CUSTOMER VALUES (
+10202,
+'Mike',
+'Myers',
+'mike@yahoo.com',
+9876123906,
+234,
+'4 Cross',
+'7',
+'Karnataka',
+'Bangalore',
+560043
+);
+
+
+INSERT INTO CUSTOMER VALUES (
+10203,
+'Greg',
+'Miller',
+'greg.miller@gmail.com',
+9591514000,
+214,
+'5 C MAIN',
+'2',
+'KARNATAKA',
+'BANGALORE',
+560043
+);
+	
+
+INSERT INTO CUSTOMER VALUES (
+10204,
+'Sarah',
+'Knightely',
+'sarah.k@hotmail.com',
+9813429527,
+142,
+'7 Cross',
+'15',
+'Karnataka',
+'Bangalore',
+560089
+);
+
+
+
+create table driver (
+DRIVER_ID NUMBER(5) CONSTRAINT PK_DRIVER_ID PRIMARY KEY,
+DRIVER_FIRST_NAME VARCHAR(25),
+DRIVER_LAST_NAME VARCHAR(25),
+DRIVER_DOB DATE,
+DRIVER_EMAIL VARCHAR(50),
+DRIVER_PHONE NUMBER(20),
+DRIVER_DATE_OF_JOIN DATE,
+DRIVER_BLOOD_GROUP VARCHAR(10),
+DRIVER_LICENCE_NO VARCHAR(10) CONSTRAINT UQ_DRIVER_LICENCE_NO UNIQUE,
+DRIVER_LICENCE_VALIDITY DATE,
+DRIVER_HOUSE_NO NUMBER(10),
+DRIVER_STREET VARCHAR(50),
+DRIVER_BLOCK VARCHAR(50),
+DRIVER_CITY VARCHAR(50),
+DRIVER_STATE VARCHAR(20),
+DRIVER_PIN_NO NUMBER(6),
+DRIVER_PIC VARCHAR(100),
+ASSIGNED VARCHAR(10) DEFAULT 'True'
+);
+
+
+CREATE TABLE LICENCETYPE (
+DRIVER_ID NUMBER(5),
+HEAVY_MOTOR_VEICHLE CHAR DEFAULT 'N',
+LIGHT_MOTOR_VEICHLE CHAR DEFAULT 'N',
+CARGO CHAR DEFAULT 'N',
+PUBLIC_TRANSPORT CHAR DEFAULT 'N',
+CONSTRAINT FK_DRI_A FOREIGN KEY (DRIVER_ID)
+REFERENCES DRIVER(DRIVER_ID) ON DELETE CASCADE
+);
+
+
+CREATE TABLE TRAINEDON (
+DRIVER_ID NUMBER(5), 
+NIGHT_DRIVING CHAR DEFAULT 'N',
+DAY_DRIVING CHAR DEFAULT 'N',
+LONG_DISTANCE CHAR DEFAULT 'N',
+SHORT_DISTANCE CHAR DEFAULT 'N',
+INTER_STATE CHAR DEFAULT 'N',
+CONSTRAINT FK_DRIVER_B FOREIGN KEY(DRIVER_ID)
+REFERENCES DRIVER(DRIVER_ID) ON DELETE CASCADE
+);
+
+
+
+create table cab (
+cab_id number(5) constraint pk_cab_id primary key,
+cab_plate_no varchar(10) constraint unique_cab_pate unique,
+cab_model varchar(30),
+cab_make varchar(30),
+cab_insu_type varchar(30),
+cab_insu_validity date,
+cab_color varchar(10),
+cab_seat_no varchar(10),
+cab_ac varchar(10),
+cab_desc varchar(150),
+cab_type varchar(30),
+cab_pic varchar(150)
+);
+
+
+
+create table cab_status (
+cab_id number(5),
+maintenance varchar(10) default 'N',
+available varchar(10) default 'Y',
+assigned varchar(10) default 'N',
+constraint fk_cab_id foreign key(cab_id)
+REFERENCES cab(cab_id) ON DELETE CASCADE
+);
+
+
+create table fare (
+fare_id number(5) constraint pk_fare_id primary key,
+min_charge number(10),
+per_km_charge number(10),
+above_hundred_charge number(10),
+ac_charge number(10),
+night_charge number(10),
+fare_validity date,
+upto_15 number(10),
+above_15 number(10)
+);
+
+
+create table booking (
+booking_id number(5) constraint pk_booking_id primary key,
+booking_date_time date,
+return_trip number(1) default 0,
+CUST_ID NUMBER(5),
+passenger_no varchar(10),
+pickup_area varchar(50),
+pickup_street varchar(50),
+pickup_block varchar(50),
+drop_area varchar(50),
+drop_street varchar(50),
+drop_block varchar(50),
+direction varchar(400),
+booking_status varchar(15) default 'Pending',
+constraint fk_book_cust_id foreign key(cust_id)
+REFERENCES customer(cust_id) ON DELETE CASCADE
+);
+
+
+
+CREATE table cab_driver_assign (
+cab_id number(5),
+driver_id number(5),
+onhire varchar(10) default 'False',
+constraint pk_cab_id_driver_id primary key(cab_id, driver_id),
+constraint fk_cabid foreign key(cab_id)
+references cab(cab_id) on delete cascade,
+constraint fk_driverid foreign key(driver_id)
+references driver(driver_id) on delete cascade
+)
+
+
+create table trip (trip_id number(5), cab_id number(5), driver_id number(5), status varchar(10), invoice varchar(10),
+constraint pk_trip_id primary key(trip_id),
+constraint fkbookid FOREIGN KEY (trip_id)
+REFERENCES booking(booking_ID) ON DELETE CASCADE,
+constraint fkcabid FOREIGN KEY (cab_id) 
+REFERENCES cab(cab_id) ON DELETE CASCADE,
+constraint fkdriverid FOREIGN KEY (driver_id)
+REFERENCES driver(driver_id) ON DELETE CASCADE)
+
+
+
+create table invoice (
+invoice_id number(5),
+booking_id number(5),
+fare_ref number(5),
+invoice_date date,
+distance number(20),
+wait_time number(10),
+total_amount number(20),
+constraint pk_invoice_id primary key(invoice_id),
+constraint fk_bookid foreign key(booking_id) 
+references booking(booking_id) on delete cascade)
+
+
+
+
+create table charge_sheet (
+booking_id number(5),
+tmin number(20),
+tdist number(20),
+tac number(20),
+tnight number(20),
+
+twait number(20),
+constraint pk_charge_booking_id primary key(booking_id),
+constraint fk_charge_booking_id foreign key(booking_id)
+references booking(booking_id) on delete cascade)
+
+
+
+create table user_table(user_id number(20) constraint pk_user_id primary key,
+user_name varchar(20),
+user_password varchar(20), user_note varchar(500));
+
+
+insert into user_table values(0001, 'shoeturtle', 'contileap09', 'This is where i write note')
+
+
+
+create table admin(admin_username varchar(20) constraint pk_admin primary key,
+admin_password varchar(20), admin_note varchar(500));
+
+
+insert into admin values('amdin1', 'admin1', 'Welome Admin to Blue Line');
+
+

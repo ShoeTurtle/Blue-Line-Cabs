@@ -1,0 +1,691 @@
+select * from tab;//litst just all the tables
+select * from tabs;
+
+
+			
+**Creating Customer Database**
+
+create table customer (
+CUST_ID NUMBER(5) CONSTRAINT PK_CUSTOMERID PRIMARY KEY,
+CUST_FIRST_NAME VARCHAR(25),
+CUST_LAST_NAME VARCHAR(25),
+CUST_EMAIL VARCHAR(40),
+CUST_PHONE NUMBER(20),
+CUST_HOUSE_NO NUMBER(10),
+CUST_STREET VARCHAR(50),
+CUST_BLOCK VARCHAR(50),
+CUST_CITY VARCHAR(50),
+CUST_STATE VARCHAR(20),
+CUST_PIN_NO VARCHAR(6)
+);
+
+
+INSERT INTO CUSTOMER VALUES (
+10201, 
+'Stepen',
+'Spilberg',
+'stephen.s@gmail.com',
+9591523000,
+214,
+'5 C MAIN',
+'2',
+'Karnataka',
+'Bangalore',
+560043
+);
+
+
+INSERT INTO CUSTOMER VALUES (
+10202,
+'Mike',
+'Myers',
+'mike@yahoo.com',
+9876123906,
+234,
+'4 Cross',
+'7',
+'Karnataka',
+'Bangalore',
+560043
+);
+
+
+INSERT INTO CUSTOMER VALUES (
+10203,
+'Greg',
+'Miller',
+'greg.miller@gmail.com',
+9591514000,
+214,
+'5 C MAIN',
+'2',
+'KARNATAKA',
+'BANGALORE',
+560043
+);
+	
+
+INSERT INTO CUSTOMER VALUES (
+10204,
+'Sarah',
+'Knightely',
+'sarah.k@hotmail.com',
+9813429527,
+142,
+'7 Cross',
+'15',
+'Karnataka',
+'Bangalore',
+560089
+);
+
+
+
+
+mcon.Execute "insert into driver values(" & Val(Me.txtCustomerID) & ",'" & Trim(Me.txtCustFN.Text) & "','" & Trim(Me.txtCustLN.Text) & "', '" & Trim(Me.txtCustEmail.Text) & "', " & Val(Me.txtCustPhone) & ", " & Val(Me.txtCustHouseNo.Text) & ", '" & Trim(me.txtCustStreet.Text) & "', " & Val(Me.txtCustBlock.Text) & ", '" & Trim(me.txtCustState.Text) & "', '" & Trim(me.txtCustCity.Text) & "', " & Val(Me.txtCustPinNo.Text) & ")"
+
+
+select * from customer order by customerid desc
+
+
+alter session set nls_language = 'english'
+
+
+** Creating Driver Database **
+
+create table driver (
+
+
+insert into test values (
+(to_date('06-10-2010','dd-mm-yyyy')));
+ 
+sqlQuery = "insert into test values(to_date('" & DTPicker1.Value & "', 'dd-mm-yyyy'))"
+
+
+
+
+
+#######################################################
+***creating Driver Table****
+
+create table driver (
+DRIVER_ID NUMBER(5) CONSTRAINT PK_DRIVER_ID PRIMARY KEY,
+DRIVER_FIRST_NAME VARCHAR(25),
+DRIVER_LAST_NAME VARCHAR(25),
+DRIVER_DOB DATE,
+DRIVER_EMAIL VARCHAR(50),
+DRIVER_PHONE NUMBER(20),
+DRIVER_DATE_OF_JOIN DATE,
+DRIVER_BLOOD_GROUP VARCHAR(10),
+DRIVER_LICENCE_NO VARCHAR(10) CONSTRAINT UQ_DRIVER_LICENCE_NO UNIQUE,
+DRIVER_LICENCE_VALIDITY DATE,
+DRIVER_HOUSE_NO NUMBER(10),
+DRIVER_STREET VARCHAR(50),
+DRIVER_BLOCK VARCHAR(50),
+DRIVER_CITY VARCHAR(50),
+DRIVER_STATE VARCHAR(20),
+DRIVER_PIN_NO NUMBER(6),
+DRIVER_PIC VARCHAR(100),
+ASSIGNED VARCHAR(10) DEFAULT 'True'
+);
+
+
+***CREATING DRIVER-LICENCE-TYPE****
+
+CREATE TABLE LICENCETYPE (
+DRIVER_ID NUMBER(5),
+HEAVY_MOTOR_VEICHLE CHAR DEFAULT 'N',
+LIGHT_MOTOR_VEICHLE CHAR DEFAULT 'N',
+CARGO CHAR DEFAULT 'N',
+PUBLIC_TRANSPORT CHAR DEFAULT 'N',
+CONSTRAINT FK_DRI_A FOREIGN KEY (DRIVER_ID)
+REFERENCES DRIVER(DRIVER_ID) ON DELETE CASCADE
+);
+
+
+****CREATING DRIVER-TRAINED-ON*****
+
+CREATE TABLE TRAINEDON (
+DRIVER_ID NUMBER(5), 
+NIGHT_DRIVING CHAR DEFAULT 'N',
+DAY_DRIVING CHAR DEFAULT 'N',
+LONG_DISTANCE CHAR DEFAULT 'N',
+SHORT_DISTANCE CHAR DEFAULT 'N',
+INTER_STATE CHAR DEFAULT 'N',
+CONSTRAINT FK_DRIVER_B FOREIGN KEY(DRIVER_ID)
+REFERENCES DRIVER(DRIVER_ID) ON DELETE CASCADE
+);
+
+####################################################################
+
+
+alter table driver modify (driver_pic varchar(50));
+select * from licencetype order by driver_id;
+
+
+update student set stucourse = 'xyz', stuid = 123 where stuname = 'Inder';
+
+
+
+SQLTextA = "insert into driver values(" _
+& "" & Val(Me.txtDriverId.Text) & "," _
+& "'" & Trim(Me.txtDriverFN.Text) & "', "  _
+& "'" & Trim(Me.txtDriverLN.Text) & "', " _
+& "to_date('" & Format(Me.dtPickDriverDOB.Value, "dd-mm-yyyy") & "', 'dd-mm-yyyy'), " _
+& "'" & Trim(Me.txtDriverEmail.Text) & "', _ 
+& "" & Val(Me.txtDriverPhNo.Text) & ", " _
+& "to_date('" & Format(Me.dtPickDriverDateOfJoin.Value, "dd-mm-yyyy") & "', 'dd-mm-yyyy'), " _
+& "'" & Me.lstComDriverBlood.Text & "', " _
+& "" & Val(Me.txtDriverLicNo.Text) & ", " _
+& "to_date('" & Format(Me.dtPickDriverLicValidity.Value, "dd-mm-yyyy") & "', 'dd-mm-yyyy'), " _
+& "" & Val(Me.txtDriverHouseNo.Text) & ", " _
+& "" & Val(Me.txtDriverStreet.Text) & ", " _
+& "" & Val(Me.txtDriverBlock.Text) & ", " _ 
+& "'" & Trim(Me.txtDriverCity.Text) & "', " _ 
+& "'" & Trim(Me.txtDriverState.Text) & "', " _
+& "" & Val(Me.txtDriverPin.Text) & ", " _
+& "'" & picpath & "' )"
+
+
+
+
+SQLTextD = "update driver set " _
+    & "DRIVER_ID = " & Val(Me.txtDriverId.Text) & ", " _
+    & "DRIVER_FIRST_NAME = '" & Trim(Me.txtDriverFN.Text) & "', " _
+    & "DRIVER_LAST_NAME = '" & Trim(Me.txtDriverLN.Text) & "', " _
+    & "DRIVER_DOB = to_date('" & Format(Me.dtPickDriverDOB.Value, "dd-mm-yyyy") & "', 'dd-mm-yyyy'), " _
+    & "DRIVER_EMAIL = '" & Trim(Me.txtDriverEmail.Text) & "', " _
+    & "DRIVER_PHONE = " & Val(Me.txtDriverPhNo.Text) & ", " _
+    & "DRIVER_DATE_OF_JOIN = to_date('" & Format(Me.dtPickDriverDateOfJoin.Value, "dd-mm-yyyy") & "', 'dd-mm-yyyy'), " _
+    & "DRIVER_BLOOD_GROUP = '" & Trim(Me.lstComDriverBlood.Text) & "', " _
+    & "DRIVER_LICENCE_NO = " & Val(Me.txtDriverLicNo.Text) & ", " _
+    & "DRIVER_LICENCE_VALIDITY = to_date('" & Format(Me.dtPickDriverLicValidity.Value, "dd-mm-yyyy") & "', 'dd-mm-yyyy')," _
+    & "DRIVER_HOUSE_NO = " & Val(Me.txtDriverHouseNo.Text) & ", " _
+    & "DRIVER_STREET = '" & Trim(Me.txtDriverStreet.Text) & "', " _
+    & "DRIVER_BLOCK = '" & Trim(Me.txtDriverBlock.Text) & "', " _
+    & "DRIVER_CITY = '" & Trim(Me.txtDriverCity.Text) & "', " _
+    & "DRIVER_STATE = '" & Trim(Me.txtDriverState.Text) & "', " _
+    & "DRIVER_PIN_NO = " & Val(Me.txtDriverPin.Text) & ", " _
+    & "DRIVER_PIC = '" & picpath & "' " _    
+    & "where driver_id = " & Val(mykey) & ""
+
+
+
+
+
+"update table liencetype set " _
+& "HEAVY_MOTOR_VEICHLE = '" & x(0) & "', " _
+& "LIGHT_MOTOR_VEICHLE = '" & x(1) & "', " _
+& "CARGO = '" & x(2) & "', " _
+& "PUBLIC_TRANSPORT = '" & x(3) & "', " _
+& "where driver_id = " & val(mykey) & ""
+
+
+
+
+
+"update table trainedon set " _
+& "NIGHT_DRIVING = '" & y(0) & "', " _
+& "DAY_DRIVING = '" & y(0) & "', " _
+& "LONG_DISTANCE = '" & y(0) & "', " _
+& "SHORT_DISTANCE = '" & y(0) & "', " _
+& "INTER_STATE = '" & y(0) & "', " _
+& "where driver_id = " & val(mykey) & ""
+
+
+
+
+CREATE TABLE TRAINEDON (
+DRIVER_ID NUMBER(5), 
+NIGHT_DRIVING CHAR DEFAULT 'N',
+DAY_DRIVING CHAR DEFAULT 'N',
+LONG_DISTANCE CHAR DEFAULT 'N',
+SHORT_DISTANCE CHAR DEFAULT 'N',
+INTER_STATE CHAR DEFAULT 'N',
+CONSTRAINT FK_DRIVER_B FOREIGN KEY(DRIVER_ID)
+REFERENCES DRIVER(DRIVER_ID) ON DELETE CASCADE
+)
+
+
+#############################################################
+
+
+Delete from driver where driver_id = 50105
+alter table customer rename column customerid to cust_id;
+
+
+
+
+#############################################################
+
+
+
+
+mcon.Execute "insert into customer values(" _
+& "" & Val(Me.txtCustID.Text) & ", " _
+& "'" & Trim(Me.txtCustFN.Text) & "', " _
+& "'" & Trim(Me.txtCustLN.Text) & "', " _
+& "'" & Trim(Me.txtCustEmail.Text) & "', " _ 
+& "" & Val(Me.txtCustPhone) & ", " _
+& "" & Val(Me.txtCustHouseNo.Text) & ", " _ 
+& "'" & Trim(Me.txtCustStreet.Text) & "', " _ 
+& "" & Val(Me.txtCustBlock.Text) & ", " _ 
+& "'" & Trim(Me.txtCustCity.Text) & "', " _ 
+& "'" & Trim(Me.txtCustState.Text) & "', " _ 
+& "" & Val(Me.txtCustPinNo.Text) & ")"
+
+
+
+
+###################################################################################
+
+cab table
+
+
+create table cab (
+cab_id number(5) constraint pk_cab_id primary key,
+cab_plate_no varchar(10) constraint unique_cab_pate unique,
+cab_model varchar(30),
+cab_make varchar(30),
+cab_insu_type varchar(30),
+cab_insu_validity date,
+cab_color varchar(10),
+cab_seat_no varchar(10),
+cab_ac varchar(10),
+cab_desc varchar(150),
+cab_type varchar(30),
+cab_pic varchar(150)
+);
+
+
+
+
+create table cab_status (
+cab_id number(5),
+maintenance varchar(10) default 'N',
+available varchar(10) default 'Y',
+assigned varchar(10) default 'N',
+constraint fk_cab_id foreign key(cab_id)
+REFERENCES cab(cab_id) ON DELETE CASCADE
+);
+
+on_hire varchar(10) default 'N',
+
+
+
+
+
+
+"insert into cab values ( "
+
+
+txtModel
+txtMake
+txtPlateNo
+txtInsType
+dtpickInsValidity
+opInService
+opMaintenance
+txtCabId
+txtType
+txtDesc
+txtColor
+cmboNoSeat
+
+opAvailable
+opMaintenance
+opOnHire
+
+opAc
+opNonAc
+
+picCab
+
+
+
+
+
+
+
+
+If (edit = False) Then
+    SQLTextA = "insert into cab values(" _
+    & "" & Val(txtCabId.Text) & ", " _
+    & "'" & Trim(txtPlateNo.Text) & "', " _
+    & "'" & Trim(txtModel.Text) & "', " _
+    & "'" & Trim(txtMake.Text) & "', " _
+    & "" & Val(txtInsType.Text) & ", " _
+    & "" & Val(dtpickInsValidity.Text) & ", " _
+    & "'" & Trim(txtColor.Text) & "', " _
+    & "'" & Trim(cmboNoSeat.Text) & "', " _
+    & "'" & Trim(opAc.Text) & "', " _
+    & "'" & Trim(txtDesc.Text) & "', " _
+    & "'" & Trim(txtType.Text) & "', " _
+    & "'" & Trim(opAvailable.Text) & "', " _     
+    & "" & Val(picCab.Text) & ")"
+    
+    mcon.Execute SQLTextA
+    
+Else
+
+    SQLTextB = "update customer set " _
+    & "CUST_ID = " & Val(Me.txtCustID.Text) & ", " _
+    & "CUST_FIRST_NAME = '" & Trim(Me.txtCustFN.Text) & "', " _
+    & "CUST_LAST_NAME = '" & Trim(Me.txtCustLN.Text) & "', " _
+    & "CUST_EMAIL = '" & Trim(Me.txtCustEmail.Text) & "', " _
+    & "CUST_PHONE = " & Val(Me.txtCustPhone) & ", " _
+    & "CUST_HOUSE_NO = " & Val(Me.txtCustHouseNo.Text) & ", " _
+    & "CUST_STREET = '" & Trim(Me.txtCustStreet.Text) & "', " _
+    & "CUST_BLOCK = '" & Trim(Me.txtCustBlock.Text) & "', " _
+    & "CUST_CITY= '" & Trim(Me.txtCustCity.Text) & "', " _
+    & "CUST_STATE = '" & Trim(Me.txtCustState.Text) & "', " _
+    & "CUST_PIN_NO = " & Val(Me.txtCustPinNo.Text) & " " _
+    & "WHERE CUST_ID = " & Val(mykey) & ""
+
+    mcon.Execute SQLTextB
+    
+End If
+
+Unload Me
+
+Call CenterMe(frmCustList)
+frmCustList.Show
+
+
+#####################################################################################
+
+Creating Fare Detailed Table
+
+
+create table fare (
+fare_id number(5) constraint pk_fare_id primary key,
+min_charge number(10),
+per_km_charge number(10),
+above_hundred_charge number(10),
+ac_charge number(10),
+night_charge number(10),
+fare_validity date,
+upto_15 number(10),
+above_15 number(10)
+);
+
+
+
+###########################################################
+
+create booking table
+
+create table booking (
+booking_id number(5) constraint pk_booking_id primary key,
+booking_date_time date,
+return_trip number(1) default 0,
+CUST_ID NUMBER(5),
+passenger_no varchar(10),
+pickup_area varchar(50),
+pickup_street varchar(50),
+pickup_block varchar(50),
+drop_area varchar(50),
+drop_street varchar(50),
+drop_block varchar(50),
+direction varchar(400),
+booking_status varchar(15) default 'Pending',
+constraint fk_book_cust_id foreign key(cust_id)
+REFERENCES customer(cust_id) ON DELETE CASCADE
+);
+
+
+########TIME TESTING########
+
+create table test(my_time date);
+
+insert into test
+(my_time)
+values
+(to_date('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+
+
+select to_char(my_time,'HH24:MI') from test;
+
+select to_char(booking_date_time, 'HH24:MI') from booking;
+
+
+
+#############################################################
+
+
+FARE_ID                
+MIN_CHARGE             
+PER_KM_CHARGE          
+ABOVE_HUNDRED_CHARGE
+AC_CHARGE              
+NON_AC_CHARGE          
+NIGHT_CHARGE           
+FARE_VALIDITY    
+UPTO_15                
+ABOVE_15                     
+
+
+BOOKING_ID             
+BOOKING_DATE_TIME
+RETURN_TRIP            
+CUST_ID                
+PASSENGER_NO           
+PICKUP_AREA            
+PICKUP_STREET          
+PICKUP_BLOCK           
+DROP_AREA              
+DROP_STREET            
+DROP_BLOCK             
+DIRECTION              
+BOOKING_STATUS                
+
+
+
+
+
+#######################################################################
+
+
+Creating cab_driver_assign table
+
+
+CREATE table cab_driver_assign (
+cab_id number(5),
+driver_id number(5),
+onhire varchar(10) default 'False',
+constraint pk_cab_id_driver_id primary key(cab_id, driver_id),
+constraint fk_cabid foreign key(cab_id)
+references cab(cab_id) on delete cascade,
+constraint fk_driverid foreign key(driver_id)
+references driver(driver_id) on delete cascade
+)
+
+
+
+
+
+
+
+
+select a.cust_id, a.cust_first_name, a.cust_last_name, b.booking_id from customer a, booking b where a.cust_id = b.cust_id;
+
+SELECT * FROM(SELECT tblcust.CUST_ID, tblcust.CUST_FIRST_NAME, tblcust.CUST_LAST_NAME, tblbook.BOOKING_ID from CUSTOMER tblcust, BOOKING tblbook where tblcust.CUST_ID = tblbook.CUST_ID) WHERE CUST_FIRST_NAME LIKE '%'
+
+SELECT tblcust.CUST_ID, tblcust.CUST_FIRST_NAME, tblcust.CUST_LAST_NAME, tblbook.BOOKING_ID from CUSTOMER tblcust, BOOKING tblbook where tblcust.CUST_ID = tblbook.CUST_ID
+
+SELECT CAB_ID, CAB_PLATE_NO, CAB_COLOR, CAB_MAKE, CAB_TYPE FROM CAB WHERE CAB_COLOR LIKE 'f%'
+
+
+
+Dim i, j As Integer
+j = Me.flxBookingList.Cols
+i = Me.flxBookingList.Rows
+
+With myFrm
+    For i = 0 To flxBookingList.Rows - 1
+        .Row = i
+        For j = 0 To flxBookingList.Cols - 1
+            .Col = j
+            If (InStr(1, flxBookingList.Text, SearchKey, vbTextCompare)) Then
+               .CellBackColor = vbYellow
+            End If
+        Next j
+    Next i
+End With
+
+End Sub
+
+
+select CAB_ID, CAB_PLATE_NO, CAB_MAKE, CAB_STATUS FROM (SELECT * FROM CAB, CAB_STATUS WHERE CAB.CAB_ID = CAB_STATUS.CAB_ID)
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Creating Trip_Table
+
+create table trip (trip_id number(5), cab_id number(5), driver_id number(5), status varchar(10), invoice varchar(10),
+constraint pk_trip_id primary key(trip_id),
+constraint fkbookid FOREIGN KEY (trip_id)
+REFERENCES booking(booking_ID) ON DELETE CASCADE,
+constraint fkcabid FOREIGN KEY (cab_id) 
+REFERENCES cab(cab_id) ON DELETE CASCADE,
+constraint fkdriverid FOREIGN KEY (driver_id)
+REFERENCES driver(driver_id) ON DELETE CASCADE)
+
+
+
+
+
+
+
+select tt.cab_id, tt.trip_id from trip tt, cab_driver_assign cc where (tt.cab_id = cc.cab_id);
+
+
+SELECT tt.trip_id, cc.driver_id FROM trip tt, cab_driver_assign cc 
+WHERE tt.cab_id = cc.cab_id AND tt.status = 'ONGO' AND tt.driver_id = 50105;
+
+
+update cab_driver_assign set onhire = 'FALSE' where cab_id = 10201
+
+
+
+
+
+
+select booking_id from booking where(booking_date_time = to_date('30-10-2011', 'dd-mm-yyyy')) 2011', 'dd-mm-yyyy'))
+
+
+select booking_id from booking where(to_char(booking_date_time, 'dd-mm-yyyy') = to_date('31-10-2011'
+
+
+
+SELECT BOOKING_ID, BOOKING_DATE_TIME, BOOKING_STATUS, CUST_ID from BOOKING  WHERE (booking_status = 'Pending' OR booking_status = 'ONGO') AND (booking_date_time > to_date('30-10-2011', 'dd-mm-yyyy')) ORDER BY BOOKING_DATE_TIME 
+
+
+
+
+
+SELECT BOOKING_ID, BOOKING_DATE_TIME, BOOKING_STATUS, CUST_ID from BOOKING  WHERE (booking_status = 'Pending' OR booking_status = 'ONGO') AND (booking_date_time > to_date('30-10-2011 17-25', 'dd-mm-yyyy hh24-mi')) ORDER BY BOOKING_DATE_TIME
+
+
+
+
+
+
+SELECT BOOKING_ID, BOOKING_DATE_TIME, BOOKING_STATUS, CUST_ID from BOOKING  WHERE 
+(booking_status = 'Pending' AND booking_date_time > to_date('30-10-2011 17-25', 'dd-mm-yyyy hh24-mi')) OR (booking_status = 'ONGO')
+
+
+C:\Documents and Settings\Binaya\Desktop\BlueLineTake6\Cabs\unavailable
+
+
+
+
+
+select booking_id from booking where (to_date(booking_date_time, 'dd-mm-yyyy') = to_date('31-10-2011', 'dd-mm-yyyy'))
+
+
+
+
+
+
+
+CUST_ID        
+CUST_FIRST_NAM
+CUST_LAST_NAME
+CUST_EMAIL     
+CUST_PHONE     
+CUST_HOUSE_NO  
+CUST_STREET    
+CUST_BLOCK     
+CUST_CITY      
+CUST_STATE     
+CUST_PIN_NO    
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+creating invoice table
+
+
+create table invoice (
+invoice_id number(5),
+booking_id number(5),
+fare_ref number(5),
+invoice_date date,
+distance number(20),
+wait_time number(10),
+total_amount number(20),
+constraint pk_invoice_id primary key(invoice_id),
+constraint fk_bookid foreign key(booking_id) 
+references booking(booking_id) on delete cascade)
+
+
+select * from booking where booking_status = 'DONE' order by booking_id
+
+
+
+
+select * from TRIP where (STATUS = 'DONE' AND INVOICE = 'FALSE') ORDER BY TRIP_ID
+
+
+
+
+
+
+select fare_id from fare where (fare_validity > to_date('01-11-2011', 'dd-mm-yyyy'))
+
+
+
+
+
+
+create table charge_sheet (
+booking_id number(5),
+tmin number(20),
+tdist number(20),
+tac number(20),
+tnight number(20),
+
+twait number(20),
+constraint pk_charge_booking_id primary key(booking_id),
+constraint fk_charge_booking_id foreign key(booking_id)
+references booking(booking_id) on delete cascade)
+
+
+
+create table user_table(user_id number(20) constraint pk_user_id primary key,
+user_name varchar(20),
+user_password varchar(20), user_note varchar(500));
+
+
+insert into user_table values(0001, 'shoeturtle', 'contileap09', 'This is where i write note
+
+
+
+
+
+
+
